@@ -26,10 +26,18 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    artist.cpp \
+    composition.cpp \
+    chart.cpp \
+    genres.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    artist.h \
+    composition.h \
+    chart.h \
+    genres.h
 
 FORMS += \
         mainwindow.ui

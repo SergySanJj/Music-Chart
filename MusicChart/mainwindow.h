@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "chart.h"
+
 #include <QMainWindow>
 
 namespace Ui {
