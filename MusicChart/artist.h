@@ -15,8 +15,7 @@ public:
     //Artist();
     ~Artist()=default;
 
-    Artist(std::string _name, std::vector<Genres> _preferedGenres, double _popularity):
-        name(std::move(_name)), preferedGenres(std::move(_preferedGenres)), popularity(_popularity) {}
+    Artist(std::string _name, std::vector<Genres> _preferedGenres, double _popularity);
 
     void addComposition(std::shared_ptr<Composition> composition);
 
