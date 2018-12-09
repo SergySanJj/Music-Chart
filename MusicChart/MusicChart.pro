@@ -34,7 +34,8 @@ SOURCES += \
     qcustomplot.cpp \
     chartitem.cpp \
     artistsmodel.cpp \
-    compositionsmodel.cpp
+    compositionsmodel.cpp \
+    addartistdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,10 +46,12 @@ HEADERS += \
     qcustomplot.h \
     chartitem.h \
     artistsmodel.h \
-    compositionsmodel.h
+    compositionsmodel.h \
+    addartistdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addartistdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -17,7 +17,7 @@ public:
     /// no empty constructor
     //Composition();
 
-    Composition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDate _releaseDate);
+    Composition(std::shared_ptr<Artist> &_artist, const std::string &_name, Genres _genre, QDate _releaseDate);
 
     void updatePopularity(QDate currentDate);
 
@@ -28,6 +28,10 @@ public:
     std::string getArtistName() const;
 
     QDate getReleaseDate() const;
+
+    Genres getGenre() const;
+
+    void normalize(double a, double b);
 
 private:
     std::shared_ptr<Artist> artist;

@@ -21,7 +21,7 @@ public:
 
     Artist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
 
-    void addComposition(std::shared_ptr<Composition> composition);
+    void addComposition(std::shared_ptr<Composition> &composition);
 
     std::string getName() const;
 
@@ -34,6 +34,8 @@ public:
     void updatePopularity(QDate currentDate);
 
     bool compositionExists(const std::string &_composition);
+
+    void normalize(double a, double b);
 
 private:
     std::vector<Genres> preferedGenres;

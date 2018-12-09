@@ -38,7 +38,25 @@
        </widget>
       </item>
       <item>
-       <widget class="QDateEdit" name="dateEdit"/>
+       <widget class="QDateEdit" name="dateEdit">
+        <property name="maximumDate">
+         <date>
+          <year>2050</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>1900</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>dd.MM.yyyy</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="updateButton">

@@ -63,6 +63,18 @@ QVariant artistsModel::data(const QModelIndex &index, int role) const
 
 bool artistsModel::addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres)
 {
+    emit layoutAboutToBeChanged();
     this->insertRow(static_cast<int>(chart->artists.size()));
-    return chart->addArtist(_name, _preferedGenres);
+    bool res = chart->addArtist(_name, _preferedGenres);
+    emit layoutChanged();
+    return res;
+}
+
+void artistsModel::emitPeparation()
+{
+    emit layoutAboutToBeChanged();
+}
+
+void artistsModel::emitChanged(){
+    emit layoutChanged();
 }

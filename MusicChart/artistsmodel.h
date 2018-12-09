@@ -1,4 +1,4 @@
-#ifndef ARTISTSMODEL_H
+﻿#ifndef ARTISTSMODEL_H
 #define ARTISTSMODEL_H
 
 #include "chart.h"
@@ -23,6 +23,10 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     bool addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
+
+    void emitPeparation();
+
+    void emitChanged();
 
 private:
     Chart *chart=nullptr;

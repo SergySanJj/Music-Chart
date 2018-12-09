@@ -61,10 +61,18 @@ QVariant compositionsModel::data(const QModelIndex &index, int role) const
                case 1:
                    return QString::fromStdString(composition->getName());
                case 2:
-                   return (composition->getReleaseDate()).toString("MM dd yyyy");
+                   return (composition->getReleaseDate()).toString("dd.MM.yyyy");
                case 3:
                    return QString::number(composition->getPopularity());
            }
        }
        return QVariant();
+}
+
+void compositionsModel::emitPeparation(){
+    emit layoutAboutToBeChanged();
+}
+
+void compositionsModel::emitChanged(){
+    emit layoutChanged();
 }
