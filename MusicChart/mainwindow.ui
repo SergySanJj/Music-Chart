@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>556</height>
+    <width>1051</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,10 +48,13 @@
         </property>
         <property name="minimumDate">
          <date>
-          <year>1900</year>
+          <year>1950</year>
           <month>1</month>
           <day>1</day>
          </date>
+        </property>
+        <property name="currentSection">
+         <enum>QDateTimeEdit::DaySection</enum>
         </property>
         <property name="displayFormat">
          <string>dd.MM.yyyy</string>
@@ -120,7 +123,7 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>250</width>
+            <width>16777215</width>
             <height>16777215</height>
            </size>
           </property>
@@ -178,7 +181,7 @@
          <widget class="QTableView" name="compositionsView">
           <property name="minimumSize">
            <size>
-            <width>520</width>
+            <width>620</width>
             <height>0</height>
            </size>
           </property>

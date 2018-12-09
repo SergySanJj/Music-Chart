@@ -33,6 +33,11 @@ public:
 
     void normalize(double a, double b);
 
+    std::string getGenresString()
+    {
+        return getGenreString(genre);
+    }
+
 private:
     std::shared_ptr<Artist> artist;
     Genres genre;

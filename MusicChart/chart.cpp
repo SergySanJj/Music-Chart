@@ -57,7 +57,7 @@ void Chart::update(QDate currentDate)
     normalizePopularity();
 
     auto iterations = currentDate.toJulianDay();
-    for (auto i=QDate(1900,1,1).toJulianDay(); i<iterations; i+=7)
+    for (auto i=QDate(1950,1,1).toJulianDay(); i<iterations; i+=7)
     {
         auto currIterationDate = QDate::fromJulianDay(i);
 

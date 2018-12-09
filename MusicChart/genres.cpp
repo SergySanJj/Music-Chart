@@ -22,11 +22,7 @@ std::string getGenreString(Genres genre){
 
 std::vector<double> createGenrePopularityVector()
 {
-    std::vector<double> res;
-    for (int genre=Genres::Rock;genre<=Genres::Chillout;genre++)
-    {
-        res.push_back(0.0);
-    }
+    std::vector<double> res(Genres::Chillout+1,0.0);
     return res;
 }
 

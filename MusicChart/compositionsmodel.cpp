@@ -19,6 +19,7 @@ QVariant compositionsModel::headerData(int section, Qt::Orientation orientation,
                 QStringList headers{
                                    "Artist",
                                    "Name",
+                                   "Genre",
                                    "Release",
                                    "Popularity"
                                     };
@@ -42,7 +43,7 @@ int compositionsModel::columnCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return 4;
+    return 5;
 }
 
 QVariant compositionsModel::data(const QModelIndex &index, int role) const
@@ -61,8 +62,10 @@ QVariant compositionsModel::data(const QModelIndex &index, int role) const
                case 1:
                    return QString::fromStdString(composition->getName());
                case 2:
-                   return (composition->getReleaseDate()).toString("dd.MM.yyyy");
+                   return QString::fromStdString(composition->getGenresString());
                case 3:
+                   return (composition->getReleaseDate()).toString("dd.MM.yyyy");
+               case 4:
                    return QString::number(composition->getPopularity());
            }
        }
