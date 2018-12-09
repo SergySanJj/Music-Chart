@@ -19,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    Chart chart;
 };
 
 #endif // MAINWINDOW_H

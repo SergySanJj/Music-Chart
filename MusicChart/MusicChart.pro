@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = MusicChart
 TEMPLATE = app
@@ -30,14 +30,18 @@ SOURCES += \
     artist.cpp \
     composition.cpp \
     chart.cpp \
-    genres.cpp
+    genres.cpp \
+    qcustomplot.cpp \
+    chartitem.cpp
 
 HEADERS += \
         mainwindow.h \
     artist.h \
     composition.h \
     chart.h \
-    genres.h
+    genres.h \
+    qcustomplot.h \
+    chartitem.h
 
 FORMS += \
         mainwindow.ui

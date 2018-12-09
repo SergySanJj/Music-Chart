@@ -1,5 +1,6 @@
 #pragma once
 
+#include "chartitem.h"
 #include "artist.h"
 #include "genres.h"
 
@@ -8,20 +9,20 @@
 
 class Artist;
 
-class Composition
+class Composition : public ChartItem
 {
 public:
     /// no empty constructor
     //Composition();
 
-    Composition(std::shared_ptr<Artist> _artist, std::string _name, Genres _genre, QDateTime _releaseDate, double _popularity);
+    Composition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
 
     void updatePopularity(QDateTime currentDate);
 
+    double getPopularity() const;
+
 private:
     std::shared_ptr<Artist> artist;
-    std::string name;
     Genres genre;
     QDateTime releaseDate;
-    double popularity;
 };

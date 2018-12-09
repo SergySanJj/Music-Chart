@@ -11,13 +11,15 @@ class Chart
 public:
     Chart();
 
-    bool addArtist(std::string _name, std::vector<Genres> _preferedGenres, double _popularity);
+    bool addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
 
-    bool addComposition(std::string _artist, std::string _name, Genres _genre, QDateTime _releaseDate, double _popularity);
+    bool addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
 
-    bool addComposition(std::shared_ptr<Artist> _artist, std::string _name, Genres _genre, QDateTime _releaseDate, double _popularity);
+    //bool addComposition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
 
     void update();
+
+    bool checkArtistExistance(const std::string &_name) const;
 
 private:
     std::vector<std::shared_ptr<Artist> > artists;
