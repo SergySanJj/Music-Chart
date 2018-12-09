@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
-#include <QDateTime>
+#include <random>
+
+#include <QDate>
 
 class ChartItem
 {
@@ -20,7 +22,7 @@ protected:
 
     int getSeed() const { return seed; }
 
-    virtual void updatePopularity(QDateTime currentDate)=0;
+    virtual void updatePopularity(QDate currentDate)=0;
 
     std::string name;
     double popularity;

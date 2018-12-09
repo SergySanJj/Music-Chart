@@ -20,7 +20,7 @@ bool Chart::addArtist(const std::string &_name, const std::vector<Genres> &_pref
     return true;
 }
 
-bool Chart::addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDateTime _releaseDate)
+bool Chart::addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDate _releaseDate)
 {
 
     std::shared_ptr<Artist> addTo = nullptr;
@@ -34,6 +34,9 @@ bool Chart::addComposition(const std::string &_artist, const std::string &_name,
     }
 
     if (!addTo)
+        return false;
+
+    if (addTo->compositionExists(_name))
         return false;
 
     std::shared_ptr<Composition> newComposition = std::make_shared<Composition>(addTo, _name, _genre, _releaseDate);

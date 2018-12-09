@@ -5,6 +5,8 @@
 
 #include <vector>
 #include <memory>
+#include <QDate>
+#include <random>
 
 class Chart
 {
@@ -13,7 +15,7 @@ public:
 
     bool addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
 
-    bool addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
+    bool addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDate _releaseDate);
 
     //bool addComposition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
 
@@ -24,5 +26,8 @@ public:
 private:
     std::vector<std::shared_ptr<Artist> > artists;
     std::vector<std::shared_ptr<Composition> > compositions;
+
+    std::vector<std::shared_ptr<Artist> > currentArtists;
+    std::vector<std::shared_ptr<Composition> > currentCompositions;
 };
 

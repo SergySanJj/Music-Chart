@@ -28,8 +28,18 @@ double Artist::avgCompositionsPopularity(){
     return res;
 }
 
-void Artist::updatePopularity(QDateTime currentDate)
+void Artist::updatePopularity(QDate currentDate)
 {
 
+}
+
+bool Artist::compositionExists(const std::string &_composition)
+{
+    for (auto composition:compositions)
+    {
+        if (composition->getName() == _composition)
+            return true;
+    }
+    return false;
 }
 

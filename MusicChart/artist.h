@@ -6,6 +6,9 @@
 
 #include <vector>
 #include <memory>
+#include <random>
+
+#include <QDate>
 
 class Composition;
 
@@ -26,7 +29,9 @@ public:
 
     double avgCompositionsPopularity();
 
-     void updatePopularity(QDateTime currentDate);
+    void updatePopularity(QDate currentDate);
+
+    bool compositionExists(const std::string &_composition);
 
 private:
     std::vector<Genres> preferedGenres;

@@ -2,8 +2,13 @@
 #define MAINWINDOW_H
 
 #include "chart.h"
+#include "genres.h"
+
+#include <random>
 
 #include <QMainWindow>
+#include <QDate>
+
 
 namespace Ui {
 class MainWindow;

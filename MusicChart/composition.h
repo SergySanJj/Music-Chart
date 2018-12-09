@@ -5,7 +5,9 @@
 #include "genres.h"
 
 #include <memory>
-#include <QDateTime>
+#include <random>
+
+#include <QDate>
 
 class Artist;
 
@@ -15,11 +17,13 @@ public:
     /// no empty constructor
     //Composition();
 
-    Composition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
+    Composition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDate _releaseDate);
 
-    void updatePopularity(QDateTime currentDate);
+    void updatePopularity(QDate currentDate);
 
     double getPopularity() const;
+
+    std::string getName() const;
 
 private:
     std::shared_ptr<Artist> artist;
