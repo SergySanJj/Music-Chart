@@ -5,6 +5,7 @@
 #include "genres.h"
 
 #include "artistsmodel.h"
+#include "compositionsmodel.h"
 
 #include <random>
 
@@ -30,6 +31,7 @@ private:
     Chart chart;
 
     artistsModel* artModel;
+    compositionsModel* compModel;
 };
 
 #endif // MAINWINDOW_H

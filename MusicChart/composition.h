@@ -25,8 +25,12 @@ public:
 
     std::string getName() const;
 
+    std::string getArtistName() const;
+
+    QDate getReleaseDate() const;
+
 private:
     std::shared_ptr<Artist> artist;
     Genres genre;
-    QDateTime releaseDate;
+    QDate releaseDate;
 };

@@ -14,9 +14,16 @@ MainWindow::MainWindow(QWidget *parent) :
     chart.addComposition("Queen","It's a kind of magic",Genres::Rock,QDate(1986,3,17));
 
     artModel = new artistsModel(chart,this);
+    compModel = new compositionsModel(chart,this);
 
     ui->ArtistsView->setModel(artModel);
     ui->ArtistsView->setColumnWidth(0,150);
+    ui->ArtistsView->setColumnWidth(1,100);
+
+    ui->compositionsView->setModel(compModel);
+    ui->compositionsView->setColumnWidth(0,150);
+    ui->compositionsView->setColumnWidth(1,150);
+    ui->compositionsView->setColumnWidth(2,100);
 }
 
 MainWindow::~MainWindow()
