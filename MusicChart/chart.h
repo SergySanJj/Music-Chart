@@ -23,11 +23,14 @@ public:
 
     bool checkArtistExistance(const std::string &_name) const;
 
-private:
+protected:
     std::vector<std::shared_ptr<Artist> > artists;
     std::vector<std::shared_ptr<Composition> > compositions;
 
-    std::vector<std::shared_ptr<Artist> > currentArtists;
-    std::vector<std::shared_ptr<Composition> > currentCompositions;
+    //std::vector<std::shared_ptr<Artist> > currentArtists;
+    //std::vector<std::shared_ptr<Composition> > currentCompositions;
+
+    friend class artistsModel;
+    friend class compositionsModel;
 };
 

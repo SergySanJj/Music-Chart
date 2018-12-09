@@ -27,6 +27,8 @@ public:
 
     int getSeed() const;
 
+    double getPopularity() const;
+
     double avgCompositionsPopularity();
 
     void updatePopularity(QDate currentDate);

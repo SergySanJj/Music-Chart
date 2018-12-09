@@ -11,7 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
     chart.addArtist("Eminem",{Genres::HipHop});
     chart.addArtist("Lady Gaga",{Genres::Pop});
 
-    chart.addComposition("Queen","It's a kind of magic",Genres::Rock,QDate(1986,3,11));
+    chart.addComposition("Queen","It's a kind of magic",Genres::Rock,QDate(1986,3,17));
+
+    artModel = new artistsModel(chart,this);
+
+    ui->ArtistsView->setModel(artModel);
+    ui->ArtistsView->setColumnWidth(0,150);
 }
 
 MainWindow::~MainWindow()

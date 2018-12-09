@@ -15,6 +15,8 @@ std::string Artist::getName() const { return name; }
 
 int Artist::getSeed() const { return seed; }
 
+double Artist::getPopularity() const { return popularity; }
+
 double Artist::avgCompositionsPopularity(){
     double res = 0.0;
     int compCount = 0;

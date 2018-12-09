@@ -32,7 +32,8 @@ SOURCES += \
     chart.cpp \
     genres.cpp \
     qcustomplot.cpp \
-    chartitem.cpp
+    chartitem.cpp \
+    artistsmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     chart.h \
     genres.h \
     qcustomplot.h \
-    chartitem.h
+    chartitem.h \
+    artistsmodel.h
 
 FORMS += \
         mainwindow.ui

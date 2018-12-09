@@ -4,6 +4,8 @@
 #include "chart.h"
 #include "genres.h"
 
+#include "artistsmodel.h"
+
 #include <random>
 
 #include <QMainWindow>
@@ -26,6 +28,8 @@ private:
     Ui::MainWindow *ui;
 
     Chart chart;
+
+    artistsModel* artModel;
 };
 
 #endif // MAINWINDOW_H
