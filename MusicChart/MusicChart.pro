@@ -35,7 +35,9 @@ SOURCES += \
     chartitem.cpp \
     artistsmodel.cpp \
     compositionsmodel.cpp \
-    addartistdialog.cpp
+    addartistdialog.cpp \
+    addcompositiondialog.cpp \
+    artistslistmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,11 +49,14 @@ HEADERS += \
     chartitem.h \
     artistsmodel.h \
     compositionsmodel.h \
-    addartistdialog.h
+    addartistdialog.h \
+    addcompositiondialog.h \
+    artistslistmodel.h
 
 FORMS += \
         mainwindow.ui \
-    addartistdialog.ui
+    addartistdialog.ui \
+    addcompositiondialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -29,13 +29,15 @@ public:
 
     double getPopularity() const;
 
-    double avgCompositionsPopularity();
+    double avgCompositionsPopularity(QDate currentDate);
 
     void updatePopularity(QDate currentDate);
 
     bool compositionExists(const std::string &_composition);
 
     void normalize(double a, double b);
+
+    void setZeroPopularity();
 
 private:
     std::vector<Genres> preferedGenres;

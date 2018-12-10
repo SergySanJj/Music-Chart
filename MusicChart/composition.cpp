@@ -7,7 +7,7 @@ Composition::Composition(std::shared_ptr<Artist> &_artist, const std::string &_n
 
 void Composition::updatePopularity(QDate currentDate)
 {
-    if (currentDate<releaseDate)
+    if (currentDate < releaseDate)
     {
         popularity = 0.0;
         return;
@@ -18,7 +18,7 @@ void Composition::updatePopularity(QDate currentDate)
 
     double start;
     double end;
-    if (delta <= ChartItem::regressAfter)
+    if (delta >= ChartItem::regressAfter)
     {
         start = -1.0;
         end = 1.0;
@@ -30,6 +30,8 @@ void Composition::updatePopularity(QDate currentDate)
     std::uniform_real_distribution<double> dist(start, end);
 
     popularity += dist(mt);
+
+    normalizeNegative();
 }
 
 double Composition::getPopularity() const { return popularity; }
@@ -44,4 +46,11 @@ Genres Composition::getGenre() const { return genre; }
 
 void Composition::normalize(double a, double b){
     ChartItem::normalize(a,b);
+}
+
+void Composition::setZeroPopularity() { popularity = 0.0; }
+
+void Composition::normalizeNegative(){
+    if (popularity<0.0)
+        popularity=0.0;
 }

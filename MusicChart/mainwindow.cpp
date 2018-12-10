@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     chart.addComposition("Lady Gaga","It's a kind",Genres::Pop,QDate(2006,3,17));
 
     artModel = new artistsModel(chart,this);
+    artListModel = new artistsListModel(chart,this);
     compModel = new compositionsModel(chart,this);
 
     ui->dateEdit->setDate(QDate::currentDate());
@@ -30,14 +31,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compositionsView->setColumnWidth(2,100);
     ui->compositionsView->setColumnWidth(3,100);
 
+
     connect(ui->AddArtist, SIGNAL(clicked()),this,SLOT(addArtistButtonClicked()));
     connect(ui->AddComposition, SIGNAL(clicked()),this,SLOT(addCompositionButtonClicked()));
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonClicked()));
     connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
 
+    updateButtonClicked();
+
     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
 
-    updateButtonClicked();
+    updateWeekDay();
 }
 
 MainWindow::~MainWindow()
@@ -72,12 +76,18 @@ void MainWindow::addArtistButtonClicked()
 
 void MainWindow::addCompositionButtonClicked()
 {
+    auto dial = new addCompositionDialog(chart,this);
 
+    connect(dial, SIGNAL(sendCompositionData(std::string,std::string, Genres, QDate)),this,SLOT(addCompositionSlot(std::string,std::string, Genres, QDate)));
+
+    dial->exec();
 }
 
 void MainWindow::updateButtonClicked()
 {
-     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,255);");
+     style()->unpolish(ui->updatingLabel);
+     ui->updatingLabel->setStyleSheet("color: rgba(110,110,110,255);");
+     style()->polish(ui->updatingLabel);
 
     artModel->layoutAboutToBeChanged();
     compModel->layoutAboutToBeChanged();
@@ -86,10 +96,49 @@ void MainWindow::updateButtonClicked()
         chart.update(ui->dateEdit->date());
     });
 
-    worker.join();
+
     artModel->layoutChanged();
     compModel->layoutChanged();
 
+    if (worker.joinable()){
+        worker.join();
+        style()->unpolish(ui->updatingLabel);
+        ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
+        style()->polish(ui->updatingLabel);
+    }
 
-     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
+    updateWeekDay();
+}
+
+void MainWindow::updateWeekDay(){
+    QString dayOfWeek;
+    int currDay = ui->dateEdit->date().dayOfWeek();
+    switch (currDay)
+    {
+    case 1:
+        dayOfWeek = "Mon";
+        break;
+    case 2:
+        dayOfWeek = "Tue";
+        break;
+    case 3:
+        dayOfWeek = "Wed";
+        break;
+    case 4:
+        dayOfWeek = "Thu";
+        break;
+    case 5:
+        dayOfWeek = "Fri";
+        break;
+    case 6:
+        dayOfWeek = "Sat";
+        break;
+    case 7:
+        dayOfWeek = "Sun";
+        break;
+    default:
+        dayOfWeek = "Unknown";
+        break;
+    }
+    ui->WeekDay->setText(dayOfWeek);
 }

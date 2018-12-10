@@ -23,7 +23,7 @@ public:
 
     //bool addComposition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
 
-    void update(QDate currentDate);
+    void update(const QDate &currentDate);
 
     bool checkArtistExistance(const std::string &_name) const;
 
@@ -34,16 +34,19 @@ protected:
     //std::vector<std::shared_ptr<Artist> > currentArtists;
     //std::vector<std::shared_ptr<Composition> > currentCompositions;
 
-    void updateGenrePopularity();
+    void updateGenrePopularity(const QDate &currentDate);
 
-    void updateArtistsPopularity(QDate currentDate);
+    void updateArtistsPopularity(const QDate &currentDate);
 
-    void updateCompositionsPopularity(QDate currentDate);
+    void updateCompositionsPopularity(const QDate &currentDate);
 
     void normalizePopularity();
 
+    void setZeroPopularities();
+
 
     friend class artistsModel;
+    friend class artistsListModel;
     friend class compositionsModel;
 };
 

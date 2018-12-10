@@ -28,9 +28,15 @@ std::vector<double> createGenrePopularityVector()
 
 double linearNormalize(double x, double a, double b)
 {
+    double res;
     if (std::abs(b-a) <= std::numeric_limits<double>::epsilon())
-        return x;
-    return 10.0*(x-a)/(b-a);
+        res = x;
+    else
+        res = 9.0*(x-a)/(b-a)+1.0;
+
+    if (res<= 0.01)
+        res = 0.0;
+    return res;
 }
 
 std::vector<double> GenrePopularity::popularity = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};

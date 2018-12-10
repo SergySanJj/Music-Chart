@@ -15,15 +15,19 @@ int Artist::getSeed() const { return seed; }
 
 double Artist::getPopularity() const { return popularity; }
 
-double Artist::avgCompositionsPopularity(){
+double Artist::avgCompositionsPopularity(QDate currentDate){
     double res = 0.0;
     int compCount = 0;
     for (auto &composition:compositions)
     {
-        res+= composition->getPopularity();
-        compCount++;
+        if (currentDate>=composition->getReleaseDate())
+        {
+            res+= composition->getPopularity();
+            compCount++;
+        }
     }
-    res = res/compCount;
+    if (compCount>0)
+        res = res/compCount;
 
     return res;
 }
@@ -36,7 +40,7 @@ void Artist::updatePopularity(QDate currentDate)
         return;
     }
 
-    double avgComp = avgCompositionsPopularity();
+    double avgComp = avgCompositionsPopularity(currentDate);
     if (avgComp<0.001)
     {
         popularity = 0.0;
@@ -62,4 +66,6 @@ bool Artist::compositionExists(const std::string &_composition)
 void Artist::normalize(double a, double b){
     ChartItem::normalize(a,b);
 }
+
+void Artist::setZeroPopularity() { popularity = 0.0; }
 

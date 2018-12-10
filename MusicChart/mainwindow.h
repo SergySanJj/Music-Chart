@@ -5,9 +5,11 @@
 #include "genres.h"
 
 #include "artistsmodel.h"
+#include "artistslistmodel.h"
 #include "compositionsmodel.h"
 
 #include "addartistdialog.h"
+#include "addcompositiondialog.h"
 
 #include <random>
 
@@ -40,7 +42,10 @@ private:
     Chart chart;
 
     artistsModel* artModel;
+    artistsListModel* artListModel;
     compositionsModel* compModel;
+
+    void updateWeekDay();
 };
 
 #endif // MAINWINDOW_H

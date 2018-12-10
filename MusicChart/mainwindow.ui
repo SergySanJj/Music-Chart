@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Music Chart</string>
+   <string>Weekly Music Chart</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -57,7 +57,26 @@
          <enum>QDateTimeEdit::DaySection</enum>
         </property>
         <property name="displayFormat">
-         <string>dd.MM.yyyy</string>
+         <string>dd MM yyyy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="WeekDay">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>70</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
         </property>
        </widget>
       </item>

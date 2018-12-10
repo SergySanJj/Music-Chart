@@ -33,6 +33,8 @@ public:
 
     void normalize(double a, double b);
 
+    void setZeroPopularity();
+
     std::string getGenresString()
     {
         return getGenreString(genre);
@@ -42,4 +44,6 @@ private:
     std::shared_ptr<Artist> artist;
     Genres genre;
     QDate releaseDate;
+
+    void normalizeNegative();
 };
