@@ -32,3 +32,5 @@ double linearNormalize(double x, double a, double b)
         return x;
     return 10.0*(x-a)/(b-a);
 }
+
+std::vector<double> GenrePopularity::popularity = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};

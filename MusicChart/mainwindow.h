@@ -13,7 +13,7 @@
 
 #include <QMainWindow>
 #include <QDate>
-
+#include <QThread>
 
 namespace Ui {
 class MainWindow;

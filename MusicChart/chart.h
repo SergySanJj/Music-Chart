@@ -34,8 +34,6 @@ protected:
     //std::vector<std::shared_ptr<Artist> > currentArtists;
     //std::vector<std::shared_ptr<Composition> > currentCompositions;
 
-    std::vector<double> genrePopularity;
-
     void updateGenrePopularity();
 
     void updateArtistsPopularity(QDate currentDate);

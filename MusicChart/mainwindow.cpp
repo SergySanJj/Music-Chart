@@ -33,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->AddArtist, SIGNAL(clicked()),this,SLOT(addArtistButtonClicked()));
     connect(ui->AddComposition, SIGNAL(clicked()),this,SLOT(addCompositionButtonClicked()));
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonClicked()));
+    connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
+
+    ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
 
     updateButtonClicked();
 }
@@ -74,11 +77,19 @@ void MainWindow::addCompositionButtonClicked()
 
 void MainWindow::updateButtonClicked()
 {
+     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,255);");
+
     artModel->layoutAboutToBeChanged();
     compModel->layoutAboutToBeChanged();
 
-    chart.update(ui->dateEdit->date());
+    std::thread worker([&](){
+        chart.update(ui->dateEdit->date());
+    });
 
+    worker.join();
     artModel->layoutChanged();
     compModel->layoutChanged();
+
+
+     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
 }

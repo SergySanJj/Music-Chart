@@ -85,19 +85,24 @@ bool Chart::checkArtistExistance(const std::string &_name) const
 }
 
 void Chart::updateGenrePopularity(){
-    genrePopularity = createGenrePopularityVector();
     std::vector<double> genreCnt = createGenrePopularityVector();
+
+    for (int i=0;i<=Genres::Chillout;i++)
+    {
+        GenrePopularity::at(Genres(i)) = 0.0;
+    }
+
     for (auto &composition:compositions)
     {
-        genrePopularity[composition->getGenre()]+=composition->getPopularity();
+        GenrePopularity::at(composition->getGenre()) += composition->getPopularity();
         genreCnt[composition->getGenre()]+=1;
     }
     for (std::size_t i=0;i<genreCnt.size();i++)
     {
         if (std::abs(genreCnt[i])>0.001)
-            genrePopularity[i] = genrePopularity[i]/genreCnt[i];
+            GenrePopularity::at(Genres(i)) = GenrePopularity::at(Genres(i))/genreCnt[i];
         else {
-            genrePopularity[i] = 0.0;
+            GenrePopularity::at(Genres(i)) = 0.0;
         }
     }
 }
@@ -141,8 +146,9 @@ void Chart::normalizePopularity(){
             maxPopularity = composition->getPopularity();
     }
 
-    for (auto &genrePop:genrePopularity)
+    for (int i=0;i<=Genres::Chillout;i++)
     {
+        double genrePop = GenrePopularity::at(Genres(i));
         if (genrePop<minPopularity)
             minPopularity = genrePop;
 
@@ -157,8 +163,9 @@ void Chart::normalizePopularity(){
     for (auto &composition:compositions)
         composition->normalize(minPopularity,maxPopularity);
 
-    for (auto &genrePop:genrePopularity)
-        genrePop = linearNormalize(genrePop,minPopularity,maxPopularity);
-
+    for (int i=0;i<=Genres::Chillout;i++)
+    {
+        GenrePopularity::at(Genres(i)) = linearNormalize(GenrePopularity::at(Genres(i)),minPopularity,maxPopularity);
+    }
 
 }

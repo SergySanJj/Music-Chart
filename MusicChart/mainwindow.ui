@@ -69,6 +69,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="updatingLabel">
+        <property name="text">
+         <string>updating..</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
