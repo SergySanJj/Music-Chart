@@ -50,7 +50,7 @@ void Artist::updatePopularity(QDate currentDate)
     std::mt19937 mt(static_cast<std::size_t>(seed+currentDate.toJulianDay()));
     std::uniform_real_distribution<double> dist(-0.5, 0.5);
 
-    popularity += avgComp + dist(mt);
+    popularity = avgComp + dist(mt);
 }
 
 bool Artist::compositionExists(const std::string &_composition)
