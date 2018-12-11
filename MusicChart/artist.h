@@ -33,6 +33,8 @@ public:
 
     bool isPreferedGenre(Genres _genre);
 
+    std::string getGenresString();
+
 private:
     std::vector<Genres> preferedGenres;
 

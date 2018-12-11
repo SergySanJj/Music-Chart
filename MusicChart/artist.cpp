@@ -66,3 +66,11 @@ bool Artist::isPreferedGenre(Genres _genre) {
     return false;
 }
 
+std::string Artist::getGenresString()
+{
+    std::string res;
+    for (auto &genre:preferedGenres)
+        res += getGenreString(genre) + " ";
+    return res;
+}
+

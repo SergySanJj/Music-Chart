@@ -16,7 +16,8 @@ QVariant artistsModel::headerData(int section, Qt::Orientation orientation, int 
             if (orientation == Qt::Horizontal) {
                 QStringList headers{
                                    "Name",
-                                   "Popularity"
+                                   "Popularity",
+                                   "Prefered Genres"
                                     };
                 return headers[section];
             }
@@ -38,7 +39,7 @@ int artistsModel::columnCount(const QModelIndex &parent) const
     if (parent.isValid())
            return 0;
 
-   return 2;
+   return 3;
 }
 
 QVariant artistsModel::data(const QModelIndex &index, int role) const
@@ -56,6 +57,8 @@ QVariant artistsModel::data(const QModelIndex &index, int role) const
                    return QString::fromStdString(artist->getName());
                case 1:
                    return QString::number(artist->getPopularity());
+               case 2:
+                   return QString::fromStdString(artist->getGenresString());
            }
        }
        return QVariant();
@@ -110,5 +113,5 @@ void artistsModel::sort(int column, Qt::SortOrder order)
                 break;
 
         }
-    emit dataChanged(index(0,0),index(static_cast<int>(chart->artists.size()),2));
+    emit dataChanged(index(0,0),index(static_cast<int>(chart->artists.size()),3));
 }
