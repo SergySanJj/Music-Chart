@@ -17,7 +17,7 @@ class Chart
 public:
     Chart();
 
-    bool addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
+    bool addArtist(const std::string &_name, const std::vector<Genres> &_preferredGenres);
 
     bool addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDate _releaseDate);
 

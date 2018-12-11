@@ -1,7 +1,7 @@
 #include "artist.h"
 
-Artist::Artist(const std::string &_name, const std::vector<Genres> &_preferedGenres):
-    ChartItem (_name), preferedGenres(_preferedGenres) {
+Artist::Artist(const std::string &_name, const std::vector<Genres> &_preferredGenres):
+    ChartItem (_name), preferredGenres(_preferredGenres) {
 }
 
 void Artist::addComposition(std::shared_ptr<Composition> &composition)
@@ -59,8 +59,8 @@ bool Artist::compositionExists(const std::string &_composition)
 
 void Artist::setZeroPopularity() { popularity = 0.0; }
 
-bool Artist::isPreferedGenre(Genres _genre) {
-    for (auto &genre:preferedGenres)
+bool Artist::isPreferredGenre(Genres _genre) {
+    for (auto &genre:preferredGenres)
         if (_genre == genre)
             return true;
     return false;
@@ -69,7 +69,7 @@ bool Artist::isPreferedGenre(Genres _genre) {
 std::string Artist::getGenresString()
 {
     std::string res;
-    for (auto &genre:preferedGenres)
+    for (auto &genre:preferredGenres)
         res += getGenreString(genre) + " ";
     return res;
 }

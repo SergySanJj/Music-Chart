@@ -17,7 +17,7 @@ QVariant artistsModel::headerData(int section, Qt::Orientation orientation, int 
                 QStringList headers{
                                    "Name",
                                    "Popularity",
-                                   "Prefered Genres"
+                                   "Preferred Genres"
                                     };
                 return headers[section];
             }
@@ -64,11 +64,11 @@ QVariant artistsModel::data(const QModelIndex &index, int role) const
        return QVariant();
 }
 
-bool artistsModel::addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres)
+bool artistsModel::addArtist(const std::string &_name, const std::vector<Genres> &_preferredGenres)
 {
     emit layoutAboutToBeChanged();
     this->insertRow(static_cast<int>(chart->artists.size()));
-    bool res = chart->addArtist(_name, _preferedGenres);
+    bool res = chart->addArtist(_name, _preferredGenres);
     emit layoutChanged();
     return res;
 }

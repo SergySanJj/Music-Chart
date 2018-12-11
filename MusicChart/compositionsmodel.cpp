@@ -97,6 +97,19 @@ void compositionsModel::sort(int column, Qt::SortOrder order)
                               });
                 }
                 break;
+            case 3:
+                if (order==Qt::AscendingOrder) {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getReleaseDate()<b->getReleaseDate();
+                              });
+                } else {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getReleaseDate()>b->getReleaseDate();
+                              });
+                }
+                break;
             case 4:
                 if (order==Qt::AscendingOrder) {
                     std::sort(chart->compositions.begin(), chart->compositions.end(),

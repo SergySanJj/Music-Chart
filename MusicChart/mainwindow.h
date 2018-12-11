@@ -30,7 +30,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void addArtistSlot(const std::string &_name, const std::vector<Genres> &_preferedGenres);
+    void addArtistSlot(const std::string &_name, const std::vector<Genres> &_preferredGenres);
     void addCompositionSlot(const std::string &_artist, const std::string &_name, Genres _genre, QDate _releaseDate);
     void addArtistButtonClicked();
     void addCompositionButtonClicked();

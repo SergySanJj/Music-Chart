@@ -19,7 +19,7 @@ public:
     //Artist();
     ~Artist()=default;
 
-    Artist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
+    Artist(const std::string &_name, const std::vector<Genres> &_preferredGenres);
 
     void addComposition(std::shared_ptr<Composition> &composition);
 
@@ -31,12 +31,12 @@ public:
 
     void setZeroPopularity();
 
-    bool isPreferedGenre(Genres _genre);
+    bool isPreferredGenre(Genres _genre);
 
     std::string getGenresString();
 
 private:
-    std::vector<Genres> preferedGenres;
+    std::vector<Genres> preferredGenres;
 
     std::vector<std::shared_ptr<Composition> > compositions;
 };

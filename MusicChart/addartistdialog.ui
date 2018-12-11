@@ -54,7 +54,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Prefered Genres:</string>
+          <string>Preferred Genres:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

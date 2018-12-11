@@ -6,7 +6,7 @@ Chart::Chart()
 
 }
 
-bool Chart::addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres)
+bool Chart::addArtist(const std::string &_name, const std::vector<Genres> &_preferredGenres)
 {
     if (_name.empty())
         return false;
@@ -14,11 +14,11 @@ bool Chart::addArtist(const std::string &_name, const std::vector<Genres> &_pref
     if (checkArtistExistance(_name))
         return false;
 
-    /// all artists must have some prefered genres in this system
-    if (_preferedGenres.empty())
+    /// all artists must have some preferred genres in this system
+    if (_preferredGenres.empty())
         return false;
 
-    artists.push_back(std::make_shared<Artist>(_name, _preferedGenres));
+    artists.push_back(std::make_shared<Artist>(_name, _preferredGenres));
 
     return true;
 }

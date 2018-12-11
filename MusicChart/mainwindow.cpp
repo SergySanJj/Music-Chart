@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->ArtistsView->setModel(artModel);
     ui->ArtistsView->setColumnWidth(0,150);
     ui->ArtistsView->setColumnWidth(1,100);
+    ui->ArtistsView->setColumnWidth(2,240);
 
     ui->compositionsView->setModel(compModel);
     ui->compositionsView->setColumnWidth(0,150);
@@ -54,9 +55,9 @@ MainWindow::~MainWindow()
     delete compModel;
 }
 
-void MainWindow::addArtistSlot(const std::string &_name, const std::vector<Genres> &_preferedGenres)
+void MainWindow::addArtistSlot(const std::string &_name, const std::vector<Genres> &_preferredGenres)
 {
-    artModel->addArtist(_name,_preferedGenres);
+    artModel->addArtist(_name,_preferredGenres);
 
     updateButtonClicked();
 }

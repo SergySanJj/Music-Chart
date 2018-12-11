@@ -22,7 +22,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    bool addArtist(const std::string &_name, const std::vector<Genres> &_preferedGenres);
+    bool addArtist(const std::string &_name, const std::vector<Genres> &_preferredGenres);
 
     void emitPeparation();
 

@@ -31,7 +31,7 @@ void Composition::updatePopularity(QDate currentDate)
 
     double randCoef;
 
-    if (artist->isPreferedGenre(genre))
+    if (artist->isPreferredGenre(genre))
         randCoef = 2.0;
     else
         randCoef = 1.0;

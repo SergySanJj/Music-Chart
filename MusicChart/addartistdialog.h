@@ -25,7 +25,7 @@ public slots:
     void onAdd();
 
 signals:
-    void sendArtistData(std::string _name,  std::vector<Genres> _preferedGenres);
+    void sendArtistData(std::string _name,  std::vector<Genres> _preferredGenres);
 
 private:
     Ui::AddArtistDialog *ui;
