@@ -79,3 +79,38 @@ void compositionsModel::emitPeparation(){
 void compositionsModel::emitChanged(){
     emit layoutChanged();
 }
+
+void compositionsModel::sort(int column, Qt::SortOrder order)
+{
+
+    switch(column) {
+            case 1:
+                if (order==Qt::AscendingOrder) {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getName()<b->getName();
+                              });
+                } else {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getName()>b->getName();
+                              });
+                }
+                break;
+            case 4:
+                if (order==Qt::AscendingOrder) {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getPopularity()<b->getPopularity();
+                              });
+                } else {
+                    std::sort(chart->compositions.begin(), chart->compositions.end(),
+                              [](const std::shared_ptr<Composition>& a, const std::shared_ptr<Composition>& b) {
+                                    return a->getPopularity()>b->getPopularity();
+                              });
+                }
+                break;
+
+        }
+    emit dataChanged(index(0,0),index(static_cast<int>(chart->artists.size()),5));
+}

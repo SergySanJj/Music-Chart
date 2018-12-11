@@ -28,6 +28,8 @@ public:
 
     void emitChanged();
 
+    void sort(int column, Qt::SortOrder order= Qt::AscendingOrder) override;
+
 private:
     Chart *chart=nullptr;
 };

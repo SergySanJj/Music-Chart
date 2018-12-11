@@ -42,6 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
 
     updateWeekDay();
+
+    ui->ArtistsView->sortByColumn(1,Qt::SortOrder::DescendingOrder);
+    ui->compositionsView->sortByColumn(4,Qt::SortOrder::DescendingOrder);
 }
 
 MainWindow::~MainWindow()
@@ -108,6 +111,9 @@ void MainWindow::updateButtonClicked()
     }
 
     updateWeekDay();
+
+    ui->ArtistsView->setSortingEnabled(true);
+    ui->compositionsView->setSortingEnabled(true);
 }
 
 void MainWindow::updateWeekDay(){

@@ -9,6 +9,8 @@ addCompositionDialog::addCompositionDialog(Chart &chart, QWidget *parent) :
 
     artListModel = new artistsListModel(chart,this);
 
+    ui->dateEdit->setDate(QDate::currentDate());
+
     ui->ArtistBox->setModel(artListModel);
 
     for (int i=Genres::Rock;i<=Genres::Chillout;i++)

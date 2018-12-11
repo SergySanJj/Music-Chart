@@ -78,3 +78,37 @@ void artistsModel::emitPeparation()
 void artistsModel::emitChanged(){
     emit layoutChanged();
 }
+
+void artistsModel::sort(int column, Qt::SortOrder order)
+{
+    switch(column) {
+            case 0:
+                if (order==Qt::AscendingOrder) {
+                    std::sort(chart->artists.begin(), chart->artists.end(),
+                              [](const std::shared_ptr<Artist>& a, const std::shared_ptr<Artist>& b) {
+                                    return a->getName()<b->getName();
+                              });
+                } else {
+                    std::sort(chart->artists.begin(), chart->artists.end(),
+                              [](const std::shared_ptr<Artist>& a, const std::shared_ptr<Artist>& b) {
+                                    return a->getName()>b->getName();
+                              });
+                }
+                break;
+            case 1:
+                if (order==Qt::AscendingOrder) {
+                    std::sort(chart->artists.begin(), chart->artists.end(),
+                              [](const std::shared_ptr<Artist>& a, const std::shared_ptr<Artist>& b) {
+                                    return a->getPopularity()<b->getPopularity();
+                              });
+                } else {
+                    std::sort(chart->artists.begin(), chart->artists.end(),
+                              [](const std::shared_ptr<Artist>& a, const std::shared_ptr<Artist>& b) {
+                                    return a->getPopularity()>b->getPopularity();
+                              });
+                }
+                break;
+
+        }
+    emit dataChanged(index(0,0),index(static_cast<int>(chart->artists.size()),2));
+}
