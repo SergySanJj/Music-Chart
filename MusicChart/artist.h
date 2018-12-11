@@ -23,21 +23,15 @@ public:
 
     void addComposition(std::shared_ptr<Composition> &composition);
 
-    std::string getName() const;
-
-    int getSeed() const;
-
-    double getPopularity() const;
-
     double avgCompositionsPopularity(QDate currentDate);
 
     void updatePopularity(QDate currentDate);
 
     bool compositionExists(const std::string &_composition);
 
-    void normalize(double a, double b);
-
     void setZeroPopularity();
+
+    bool isPreferedGenre(Genres _genre);
 
 private:
     std::vector<Genres> preferedGenres;

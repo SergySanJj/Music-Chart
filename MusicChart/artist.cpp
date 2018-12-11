@@ -9,18 +9,12 @@ void Artist::addComposition(std::shared_ptr<Composition> &composition)
     compositions.push_back(composition);
 }
 
-std::string Artist::getName() const { return name; }
-
-int Artist::getSeed() const { return seed; }
-
-double Artist::getPopularity() const { return popularity; }
-
 double Artist::avgCompositionsPopularity(QDate currentDate){
     double res = 0.0;
     int compCount = 0;
     for (auto &composition:compositions)
     {
-        if (currentDate>=composition->getReleaseDate())
+        if (currentDate>=composition->getReleaseDate() && composition->getPopularity()>=1.0)
         {
             res+= composition->getPopularity();
             compCount++;
@@ -63,9 +57,12 @@ bool Artist::compositionExists(const std::string &_composition)
     return false;
 }
 
-void Artist::normalize(double a, double b){
-    ChartItem::normalize(a,b);
-}
-
 void Artist::setZeroPopularity() { popularity = 0.0; }
+
+bool Artist::isPreferedGenre(Genres _genre) {
+    for (auto &genre:preferedGenres)
+        if (_genre == genre)
+            return true;
+    return false;
+}
 

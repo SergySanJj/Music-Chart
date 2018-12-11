@@ -10,6 +10,13 @@
 class ChartItem
 {
 public:
+    virtual std::string getName() const { return name; }
+
+    virtual double getPopularity() const { return popularity; }
+
+    virtual int getSeed() const { return seed; }
+
+    virtual void normalize(double a, double b);
 protected:
     /// no empty constructor
     //ChartItem();
@@ -18,15 +25,6 @@ protected:
     ChartItem(std::string _name, double _popularity=1.0);
 
     virtual ~ChartItem()=default;
-
-
-    std::string getName() const { return name; }
-
-    double getPopularity() const { return popularity; }
-
-    int getSeed() const { return seed; }
-
-    void normalize(double a, double b);
 
     virtual void updatePopularity(QDate currentDate)=0;
 

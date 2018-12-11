@@ -17,7 +17,8 @@ void Composition::updatePopularity(QDate currentDate)
     std::mt19937 mt(static_cast<std::size_t>(seed+delta));
 
     double start;
-    double end;
+    double end;    
+
     if (delta >= ChartItem::regressAfter)
     {
         start = -1.0;
@@ -27,26 +28,41 @@ void Composition::updatePopularity(QDate currentDate)
        start = 0.0;
        end = 2.0;
     }
+
+    double randCoef;
+
+    if (artist->isPreferedGenre(genre))
+        randCoef = 2.0;
+    else
+        randCoef = 1.0;
+
     std::uniform_real_distribution<double> dist(start, end);
 
-    popularity += dist(mt);
+    std::uniform_real_distribution<double> genreStrenght(0.05, 0.25);
+    std::uniform_real_distribution<double> artistStrenght(0.10, 0.30);
+
+    double k1 = genreStrenght(mt);
+    double k2 = artistStrenght(mt);
+    double k3 = 1.0 - k1 - k2;
+
+
+
+    double genreAvg = GenrePopularity::at(this->genre)*k1;
+
+    double artistAvg = this->artist->avgCompositionsPopularity(currentDate)*k2;
+
+    double compPrediction = popularity*k3;
+
+    popularity = compPrediction + genreAvg + artistAvg + dist(mt)*randCoef;
 
     normalizeNegative();
 }
-
-double Composition::getPopularity() const { return popularity; }
-
-std::string Composition::getName() const { return name; }
 
 std::string Composition::getArtistName() const { return artist->getName(); }
 
 QDate Composition::getReleaseDate() const { return releaseDate; }
 
 Genres Composition::getGenre() const { return genre; }
-
-void Composition::normalize(double a, double b){
-    ChartItem::normalize(a,b);
-}
 
 void Composition::setZeroPopularity() { popularity = 0.0; }
 

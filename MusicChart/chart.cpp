@@ -96,7 +96,7 @@ void Chart::updateGenrePopularity(const QDate &currentDate){
 
     for (auto &composition:compositions)
     {
-        if (composition->getReleaseDate()<=currentDate)
+        if (composition->getReleaseDate()<=currentDate && composition->getPopularity()>=1.0)
         {
             GenrePopularity::at(composition->getGenre()) += composition->getPopularity();
             genreCnt[composition->getGenre()]+=1.0;

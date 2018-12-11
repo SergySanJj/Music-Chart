@@ -17,7 +17,10 @@ std::string getGenreString(Genres genre){
         return "Alternative";
     case Genres::Chillout:
         return "Chillout";
+    //default:
+    //    return "Unknown";
     }
+    return "Unknown";
 }
 
 std::vector<double> createGenrePopularityVector()

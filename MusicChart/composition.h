@@ -21,9 +21,9 @@ public:
 
     void updatePopularity(QDate currentDate);
 
-    double getPopularity() const;
+    //double getPopularity() const;
 
-    std::string getName() const;
+    //std::string getName() const;
 
     std::string getArtistName() const;
 
@@ -31,7 +31,7 @@ public:
 
     Genres getGenre() const;
 
-    void normalize(double a, double b);
+    //void normalize(double a, double b);
 
     void setZeroPopularity();
 
