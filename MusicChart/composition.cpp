@@ -45,7 +45,14 @@ void Composition::updatePopularity(QDate currentDate)
     double k2 = artistStrenght(mt);
     double k3 = 1.0 - k1 - k2;
 
+    std::shared_ptr<Composition> thisPtr = std::make_shared<Composition>(*this);
 
+    if (artist->isSignature(thisPtr))
+    {
+        k1 = 0.05;
+        k2 = 0.10;
+        k3 = 0.85;
+    }
 
     double genreAvg = GenrePopularity::at(this->genre)*k1;
 

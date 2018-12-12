@@ -12,12 +12,21 @@ void Artist::addComposition(std::shared_ptr<Composition> &composition)
 double Artist::avgCompositionsPopularity(QDate currentDate){
     double res = 0.0;
     int compCount = 0;
+
+    double maxPop = -1000.0;
+
     for (auto &composition:compositions)
     {
         if (currentDate>=composition->getReleaseDate() && composition->getPopularity()>=1.0)
         {
             res+= composition->getPopularity();
             compCount++;
+
+            if (maxPop < composition->getPopularity())
+            {
+                maxPop = composition->getPopularity();
+                signatureComposition = composition;
+            }
         }
     }
     if (compCount>0)
@@ -64,6 +73,17 @@ bool Artist::isPreferredGenre(Genres _genre) {
         if (_genre == genre)
             return true;
     return false;
+}
+
+bool Artist::isSignature(const std::shared_ptr<Composition> &_composition)
+{
+    if (signatureComposition == nullptr)
+        return true;
+
+    if (signatureComposition == _composition)
+        return true;
+    else
+        return false;
 }
 
 std::string Artist::getGenresString()

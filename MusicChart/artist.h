@@ -33,10 +33,14 @@ public:
 
     bool isPreferredGenre(Genres _genre);
 
+    bool isSignature(const std::shared_ptr<Composition> &_composition);
+
     std::string getGenresString();
 
 private:
     std::vector<Genres> preferredGenres;
 
     std::vector<std::shared_ptr<Composition> > compositions;
+
+    std::shared_ptr<Composition> signatureComposition;
 };
