@@ -19,14 +19,22 @@ MainWindow::MainWindow(QWidget *parent) :
     artListModel = new artistsListModel(chart,this);
     compModel = new compositionsModel(chart,this);
 
+
+    compProxy = new QSortFilterProxyModel(this);
+    artProxy = new QSortFilterProxyModel(this);
+
+    compProxy->setSourceModel(compModel);
+    artProxy->setSourceModel(artModel);
+
+
     ui->dateEdit->setDate(QDate::currentDate());
 
-    ui->ArtistsView->setModel(artModel);
+    ui->ArtistsView->setModel(artProxy);
     ui->ArtistsView->setColumnWidth(0,150);
     ui->ArtistsView->setColumnWidth(1,100);
     ui->ArtistsView->setColumnWidth(2,240);
 
-    ui->compositionsView->setModel(compModel);
+    ui->compositionsView->setModel(compProxy);
     ui->compositionsView->setColumnWidth(0,150);
     ui->compositionsView->setColumnWidth(1,150);
     ui->compositionsView->setColumnWidth(2,100);
@@ -44,8 +52,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateWeekDay();
 
-    ui->ArtistsView->sortByColumn(1,Qt::SortOrder::DescendingOrder);
-    ui->compositionsView->sortByColumn(4,Qt::SortOrder::DescendingOrder);
+    /// TODO: here
+    compProxy->setFilterRegExp(QRegExp("Rock",Qt::CaseInsensitive,QRegExp::FixedString));
+    compProxy->setFilterKeyColumn(2);
+
+
+    artModel->sort(1,Qt::SortOrder::DescendingOrder);
+    compModel->sort(4,Qt::SortOrder::DescendingOrder);
+
+
+    //ui->ArtistsView->sortByColumn(1,Qt::SortOrder::DescendingOrder);
+    //ui->compositionsView->sortByColumn(4,Qt::SortOrder::DescendingOrder);
 }
 
 MainWindow::~MainWindow()
@@ -113,8 +130,8 @@ void MainWindow::updateButtonClicked()
 
     updateWeekDay();
 
-    ui->ArtistsView->setSortingEnabled(true);
-    ui->compositionsView->setSortingEnabled(true);
+    artModel->sort(1,Qt::SortOrder::DescendingOrder);
+    compModel->sort(4,Qt::SortOrder::DescendingOrder);
 }
 
 void MainWindow::updateWeekDay(){

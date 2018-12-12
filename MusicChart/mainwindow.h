@@ -36,6 +36,10 @@ public slots:
     void addCompositionButtonClicked();
     void updateButtonClicked();
 
+    void filter();
+
+    void clearFilter();
+
 private:
     Ui::MainWindow *ui;
 
@@ -45,7 +49,11 @@ private:
     artistsListModel* artListModel;
     compositionsModel* compModel;
 
+    QSortFilterProxyModel *compProxy;
+    QSortFilterProxyModel *artProxy;
+
     void updateWeekDay();
+
 };
 
 #endif // MAINWINDOW_H

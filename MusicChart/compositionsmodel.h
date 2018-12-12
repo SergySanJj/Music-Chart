@@ -3,6 +3,7 @@
 
 #include "chart.h"
 #include <QAbstractTableModel>
+#include <QSortFilterProxyModel>
 
 class compositionsModel : public QAbstractTableModel
 {
@@ -26,6 +27,8 @@ public:
     void emitChanged();
 
     void sort(int column, Qt::SortOrder order= Qt::AscendingOrder) override;
+
+
 
 private:
     Chart *chart=nullptr;
