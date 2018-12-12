@@ -40,11 +40,26 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compositionsView->setColumnWidth(2,100);
     ui->compositionsView->setColumnWidth(3,100);
 
+    ui->ArtistFilterBox->setModel(artListModel);
+
+    for (int genre=Genres::Rock;genre!=Genres::Chillout;genre++)
+    {
+        auto newCheckBox = new QCheckBox();
+
+        newCheckBox->setText(QString::fromStdString(getGenreString(Genres(genre))));
+
+        ui->GenresLayout->layout()->addWidget(newCheckBox);
+
+        genreCheckBoxes.push_back(newCheckBox);
+    }
+
+
 
     connect(ui->AddArtist, SIGNAL(clicked()),this,SLOT(addArtistButtonClicked()));
     connect(ui->AddComposition, SIGNAL(clicked()),this,SLOT(addCompositionButtonClicked()));
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonClicked()));
     connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
+    connect(ui->clearFilterButton,SIGNAL(clicked()),this,SLOT(clearFilter()));
 
     updateButtonClicked();
 
@@ -132,6 +147,18 @@ void MainWindow::updateButtonClicked()
 
     artModel->sort(1,Qt::SortOrder::DescendingOrder);
     compModel->sort(4,Qt::SortOrder::DescendingOrder);
+}
+
+void MainWindow::filter()
+{
+
+}
+
+void MainWindow::clearFilter()
+{
+    /// TODO: here
+    //compProxy->setFilterRegExp(QRegExp("*"));
+    //compProxy->invalidateFilter()
 }
 
 void MainWindow::updateWeekDay(){

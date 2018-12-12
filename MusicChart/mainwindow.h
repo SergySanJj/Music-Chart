@@ -52,6 +52,8 @@ private:
     QSortFilterProxyModel *compProxy;
     QSortFilterProxyModel *artProxy;
 
+    std::vector<QCheckBox*> genreCheckBoxes;
+
     void updateWeekDay();
 
 };
