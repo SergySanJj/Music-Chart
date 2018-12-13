@@ -7,10 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QFile file(":/stylesheet.qss");
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        this->setStyleSheet(file.readAll());
+        file.close();
+    }
+
     /// Test artists and compositions
     addTestArtistAndCompositions();
-
-
 
     artModel = new artistsModel(chart,this);
     artListModel = new artistsBoxModel(chart,this);
@@ -139,6 +144,8 @@ void MainWindow::updateButtonClicked()
 
     artModel->sort(1,Qt::SortOrder::DescendingOrder);
     compModel->sort(4,Qt::SortOrder::DescendingOrder);
+
+    compProxy->refilter();
 }
 
 void MainWindow::filter()
@@ -181,18 +188,24 @@ void MainWindow::clearFilter()
 
 void MainWindow::showCompositionHistoryButtonClicked()
 {
+
+
     artModel->layoutAboutToBeChanged();
     compModel->layoutAboutToBeChanged();
 
-    std::size_t row = 0;
-    row = static_cast<std::size_t>(
-                compProxy->mapToSource(ui->compositionsView->currentIndex()).row());
+    int row = 0;
+    row = compProxy->mapToSource(ui->compositionsView->currentIndex()).row();
+
+    if (ui->compositionsView->isRowHidden(row))
+        return;
+    if (row<0)
+        return;
+
+    compositionHistoryDialog *dial =
+            new compositionHistoryDialog(chart,ui->dateEdit->date(),static_cast<std::size_t>(row),this);
 
     artModel->layoutChanged();
     compModel->layoutChanged();
-
-    compositionHistoryDialog *dial =
-            new compositionHistoryDialog(chart,ui->dateEdit->date(),row,this);
 
     dial->exec();
 }

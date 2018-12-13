@@ -29,3 +29,7 @@ void filterArtistGenreProxy::setGenreFilter(const QString &regExp){
     genreRegExp.setPattern(regExp);
     invalidateFilter();
 }
+
+void filterArtistGenreProxy::refilter(){
+    invalidateFilter();
+}

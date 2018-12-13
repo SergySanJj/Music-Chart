@@ -20,6 +20,8 @@
 #include <QMainWindow>
 #include <QDate>
 #include <QThread>
+#include <QFile>
+
 
 namespace Ui {
 class MainWindow;

@@ -21,6 +21,7 @@ addCompositionDialog::addCompositionDialog(Chart &chart, QWidget *parent) :
     }
 
     connect(ui->AddButton,SIGNAL(clicked()),this,SLOT(onAddButtonClicked()));
+    connect(ui->CancelButton,SIGNAL(clicked()),this,SLOT(close()));
 
 }
 

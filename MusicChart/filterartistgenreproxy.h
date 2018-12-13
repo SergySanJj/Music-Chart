@@ -16,6 +16,8 @@ public slots:
 
     void setGenreFilter(const QString& regExp);
 
+    void refilter();
+
 private:
     QRegExp artistRegExp;
     QRegExp genreRegExp;
