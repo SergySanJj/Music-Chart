@@ -3,13 +3,15 @@ QWidget {
         color: rgb(230,230,230);
         border: 0px;
         font: 12pt bold;
+        selection-color: rgb(230,230,230);
+        selection-background-color: rgb(213, 126, 76);
 }
 
 QTableView {
+    selection-color: rgb(230,230,230);
     selection-background-color: rgb(213, 126, 76);
     background-color: rgb(112,112,112);
     color: rgb(210,210,210);
-    selection-color: rgb(230,230,230);
 }
 
 QLineEdit {
