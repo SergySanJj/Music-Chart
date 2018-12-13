@@ -36,6 +36,10 @@ public:
 
     QDate getCompositionReleaseDate(std::size_t row) const;
 
+    std::size_t getArtistIndex(const std::string &artistName) const;
+
+    std::string getCompositionArtistName(std::size_t row) const;
+
 protected:
 
     void updateStep(const QDate &currIterationDate);

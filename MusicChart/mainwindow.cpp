@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->compositionHistoryButton,SIGNAL(clicked()),this,SLOT(showCompositionHistoryButtonClicked()));
 
+    connect(ui->ArtistsView, SIGNAL(clicked(QModelIndex)), this, SLOT(artistChosen(QModelIndex)));
+    connect(ui->compositionsView, SIGNAL(clicked(QModelIndex)), this, SLOT(compositionChosen(QModelIndex)));
+
     updateButtonClicked();
 
     ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
@@ -68,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     artModel->sort(1,Qt::SortOrder::DescendingOrder);
     compModel->sort(4,Qt::SortOrder::DescendingOrder);
+
+    ui->compositionsView->selectRow(0);
 }
 
 MainWindow::~MainWindow()
@@ -176,12 +181,36 @@ void MainWindow::clearFilter()
 
 void MainWindow::showCompositionHistoryButtonClicked()
 {
-    std::size_t row = 0;
-    //compProxy->mapSelectionToSource(ui->compositionsView->selectionMod);
+    artModel->layoutAboutToBeChanged();
+    compModel->layoutAboutToBeChanged();
 
-    compositionHistoryDialog *dial = new compositionHistoryDialog(chart,ui->dateEdit->date(),row,this);
+    std::size_t row = 0;
+    row = static_cast<std::size_t>(
+                compProxy->mapToSource(ui->compositionsView->currentIndex()).row());
+
+    artModel->layoutChanged();
+    compModel->layoutChanged();
+
+    compositionHistoryDialog *dial =
+            new compositionHistoryDialog(chart,ui->dateEdit->date(),row,this);
 
     dial->exec();
+}
+
+void MainWindow::artistChosen(const QModelIndex &current)
+{
+    ui->ArtistFilterBox->setCurrentIndex(current.row()+1);
+    filter();
+}
+
+void MainWindow::compositionChosen(const QModelIndex &current)
+{
+    int row = static_cast<int>(chart.getArtistIndex(
+                                   chart.getCompositionArtistName(
+                                       static_cast<std::size_t>(
+                                           compProxy->mapToSource(current).row()))));
+
+    ui->ArtistsView->selectRow(row);
 }
 
 void MainWindow::updateWeekDay(){

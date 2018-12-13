@@ -46,6 +46,10 @@ public slots:
 
     void showCompositionHistoryButtonClicked();
 
+    void artistChosen(const QModelIndex &current);
+
+    void compositionChosen(const QModelIndex &current);
+
 private:
     Ui::MainWindow *ui;
 

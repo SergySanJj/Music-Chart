@@ -229,7 +229,7 @@ void Chart::normalizePopularity(){
 
 void Chart::setZeroPopularities()
 {
-    for (int i=0;i<=Genres::Chillout;i++)
+    for (int i=Genres::Rock;i<=Genres::Chillout;i++)
     {
         GenrePopularity::at(Genres(i)) = 0.0;
     }
@@ -254,6 +254,20 @@ double Chart::getCompositionPopularity(std::size_t row) const
 QDate Chart::getCompositionReleaseDate(std::size_t row) const
 {
     return  compositions[row]->getReleaseDate();
+}
+
+std::string Chart::getCompositionArtistName(std::size_t row) const{
+    return compositions[row]->getArtistName();
+}
+
+std::size_t Chart::getArtistIndex(const std::string &artistName) const
+{
+    for (std::size_t i=0;i<artists.size();i++)
+    {
+        if(artists[i]->getName() == artistName)
+            return i;
+    }
+    return 0;
 }
 
 

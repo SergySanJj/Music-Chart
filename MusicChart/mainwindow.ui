@@ -211,7 +211,7 @@
           <item>
            <widget class="QPushButton" name="compositionHistoryButton">
             <property name="text">
-             <string>Show composition history</string>
+             <string>Show selected composition history</string>
             </property>
            </widget>
           </item>
