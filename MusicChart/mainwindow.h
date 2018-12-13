@@ -13,6 +13,7 @@
 
 #include "addartistdialog.h"
 #include "addcompositiondialog.h"
+#include "compositionhistorydialog.h"
 
 #include <random>
 
@@ -42,6 +43,8 @@ public slots:
     void filter();
 
     void clearFilter();
+
+    void showCompositionHistoryButtonClicked();
 
 private:
     Ui::MainWindow *ui;

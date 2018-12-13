@@ -54,30 +54,67 @@ bool Chart::addComposition(const std::string &_artist, const std::string &_name,
 
 void Chart::update(const QDate &currentDate)
 {
-    //normalizePopularity();
     setZeroPopularities();
 
     QDate dateIter = QDate(1970,1,5);
-    long long julianDays = dateIter.toJulianDay();
-    auto iterations = currentDate.toJulianDay();
 
-    for (auto i=julianDays; i<iterations; i=dateIter.toJulianDay())
+
+    while (dateIter<=currentDate)
     {
-        auto currIterationDate = QDate::fromJulianDay(i);
-
-        // update genres
-         updateGenrePopularity(currentDate);
-
-        // update artists
-         updateArtistsPopularity(currIterationDate);
-
-        // update compositions
-        updateCompositionsPopularity(currIterationDate);
-
-        //normalizePopularity();
+        updateStep(dateIter);
 
         dateIter = dateIter.addMonths(1);
     }
+}
+
+std::pair<QVector<double>, QVector<double> > Chart::getCompositionHistory(const QDate &currentDate, std::size_t row){
+    long long begin = compositions[row]->getReleaseDate().toJulianDay();
+    long long end = currentDate.toJulianDay();
+
+    if (end<begin)
+        return std::make_pair(QVector<double>(),QVector<double>());
+
+    QVector<double> x(static_cast<int>(end-begin+1));
+    QVector<double> y(static_cast<int>(end-begin+1));
+
+    setZeroPopularities();
+
+    QDate dateIter = QDate(1970,1,5);
+
+    int cnt = 0;
+
+    QDate release = compositions[row]->getReleaseDate();
+
+    while (dateIter<=currentDate)
+    {
+        updateStep(dateIter);
+
+        if (dateIter>=release)
+        {
+            x[cnt] = cnt;
+            y[cnt] = compositions[row]->getPopularity();
+            cnt++;
+        }
+        dateIter = dateIter.addMonths(1);
+    }
+
+    return std::make_pair(x,y);
+}
+
+void Chart::updateStep(const QDate &currIterationDate)
+{
+    //auto currIterationDate = QDate::fromJulianDay(i);
+
+    // update genres
+     updateGenrePopularity(currIterationDate);
+
+    // update artists
+     updateArtistsPopularity(currIterationDate);
+
+    // update compositions
+    updateCompositionsPopularity(currIterationDate);
+
+    //normalizePopularity();
 }
 
 bool Chart::checkArtistExistance(const std::string &_name) const
@@ -88,6 +125,10 @@ bool Chart::checkArtistExistance(const std::string &_name) const
             return true;
     }
     return false;
+}
+
+std::string Chart::getCompositionString(std::size_t row) const {
+    return compositions[row]->getArtistName() + " - " + compositions[row]->getName();
 }
 
 void Chart::updateGenrePopularity(const QDate &currentDate){
@@ -204,3 +245,15 @@ void Chart::setZeroPopularities()
     }
 
 }
+
+double Chart::getCompositionPopularity(std::size_t row) const
+{
+    return compositions[row]->getPopularity();
+}
+
+QDate Chart::getCompositionReleaseDate(std::size_t row) const
+{
+    return  compositions[row]->getReleaseDate();
+}
+
+

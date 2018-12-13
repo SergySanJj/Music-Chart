@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1168</width>
+    <width>1173</width>
     <height>769</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Weekly Music Chart</string>
+   <string>Monthly Music Chart</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -137,7 +137,7 @@
           <property name="minimumSize">
            <size>
             <width>500</width>
-            <height>0</height>
+            <height>100</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -193,8 +193,8 @@
          <widget class="QTableView" name="compositionsView">
           <property name="minimumSize">
            <size>
-            <width>620</width>
-            <height>0</height>
+            <width>625</width>
+            <height>100</height>
            </size>
           </property>
          </widget>
@@ -205,6 +205,13 @@
            <widget class="QPushButton" name="AddComposition">
             <property name="text">
              <string>Add composition</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="compositionHistoryButton">
+            <property name="text">
+             <string>Show composition history</string>
             </property>
            </widget>
           </item>

@@ -30,12 +30,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->ArtistsView->setColumnWidth(0,150);
     ui->ArtistsView->setColumnWidth(1,100);
     ui->ArtistsView->setColumnWidth(2,240);
+    ui->ArtistsView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     ui->compositionsView->setModel(compProxy);
     ui->compositionsView->setColumnWidth(0,150);
     ui->compositionsView->setColumnWidth(1,150);
     ui->compositionsView->setColumnWidth(2,100);
     ui->compositionsView->setColumnWidth(3,100);
+    ui->compositionsView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     ui->ArtistFilterBox->setModel(artListModel);
 
@@ -55,6 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
     connect(ui->filterButton,SIGNAL(clicked()),this,SLOT(filter()));
     connect(ui->clearFilterButton,SIGNAL(clicked()),this,SLOT(clearFilter()));
+
+    connect(ui->compositionHistoryButton,SIGNAL(clicked()),this,SLOT(showCompositionHistoryButtonClicked()));
 
     updateButtonClicked();
 
@@ -114,19 +118,17 @@ void MainWindow::updateButtonClicked()
     artModel->layoutAboutToBeChanged();
     compModel->layoutAboutToBeChanged();
 
-    std::thread worker([&](){
-        chart.update(ui->dateEdit->date());
-    });
+    chart.update(ui->dateEdit->date());
+
 
     artModel->layoutChanged();
     compModel->layoutChanged();
 
-    if (worker.joinable()){
-        worker.join();
-        style()->unpolish(ui->updatingLabel);
-        ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
-        style()->polish(ui->updatingLabel);
-    }
+
+    style()->unpolish(ui->updatingLabel);
+    ui->updatingLabel->setStyleSheet("color: rgba(0,0,0,0);");
+    style()->polish(ui->updatingLabel);
+
 
     updateWeekDay();
 
@@ -170,6 +172,16 @@ void MainWindow::clearFilter()
     }
 
     ui->ArtistFilterBox->setCurrentIndex(0);
+}
+
+void MainWindow::showCompositionHistoryButtonClicked()
+{
+    std::size_t row = 0;
+    //compProxy->mapSelectionToSource(ui->compositionsView->selectionMod);
+
+    compositionHistoryDialog *dial = new compositionHistoryDialog(chart,ui->dateEdit->date(),row,this);
+
+    dial->exec();
 }
 
 void MainWindow::updateWeekDay(){

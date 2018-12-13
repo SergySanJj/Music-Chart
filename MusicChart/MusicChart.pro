@@ -39,7 +39,8 @@ SOURCES += \
     addcompositiondialog.cpp \
     artistslistmodel.cpp \
     filterartistgenreproxy.cpp \
-    artistsboxmodel.cpp
+    artistsboxmodel.cpp \
+    compositionhistorydialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,12 +56,14 @@ HEADERS += \
     addcompositiondialog.h \
     artistslistmodel.h \
     filterartistgenreproxy.h \
-    artistsboxmodel.h
+    artistsboxmodel.h \
+    compositionhistorydialog.h
 
 FORMS += \
         mainwindow.ui \
     addartistdialog.ui \
-    addcompositiondialog.ui
+    addcompositiondialog.ui \
+    compositionhistorydialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

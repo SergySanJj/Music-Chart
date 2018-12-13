@@ -11,6 +11,7 @@
 #include <limits>
 
 #include <QDate>
+#include <QVector>
 
 class Chart
 {
@@ -27,7 +28,18 @@ public:
 
     bool checkArtistExistance(const std::string &_name) const;
 
+    std::string getCompositionString(std::size_t row) const;
+
+    std::pair<QVector<double>,QVector<double> > getCompositionHistory(const QDate &currentDate, std::size_t row);
+
+    double getCompositionPopularity(std::size_t row) const;
+
+    QDate getCompositionReleaseDate(std::size_t row) const;
+
 protected:
+
+    void updateStep(const QDate &currIterationDate);
+
     void updateGenrePopularity(const QDate &currentDate);
 
     void updateArtistsPopularity(const QDate &currentDate);
