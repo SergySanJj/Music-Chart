@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     compModel = new compositionsModel(chart,this);
 
 
-    compProxy = new QSortFilterProxyModel(this);
+    compProxy = new filterArtistGenreProxy(this);
     artProxy = new QSortFilterProxyModel(this);
 
     compProxy->setSourceModel(compModel);
@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->AddComposition, SIGNAL(clicked()),this,SLOT(addCompositionButtonClicked()));
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonClicked()));
     connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
+    connect(ui->filterButton,SIGNAL(clicked()),this,SLOT(filter()));
     connect(ui->clearFilterButton,SIGNAL(clicked()),this,SLOT(clearFilter()));
 
     updateButtonClicked();
@@ -68,8 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     updateWeekDay();
 
     /// TODO: here
-    compProxy->setFilterRegExp(QRegExp("Rock",Qt::CaseInsensitive,QRegExp::FixedString));
-    compProxy->setFilterKeyColumn(2);
+    //compProxy->setFilterRegExp(QRegExp("Rock",Qt::CaseInsensitive,QRegExp::FixedString));
+    //compProxy->setFilterKeyColumn(2);
 
 
     artModel->sort(1,Qt::SortOrder::DescendingOrder);
@@ -151,14 +152,36 @@ void MainWindow::updateButtonClicked()
 
 void MainWindow::filter()
 {
+    // filter by genres
+    QString genreRegExp = "(";
+    for (auto &box:genreCheckBoxes)
+    {
+        if (box->checkState())
+        {
+            genreRegExp += box->text()+"|";
+        }
+    }
+    if (genreRegExp != "(")
+        genreRegExp[genreRegExp.size()-1] = ')';
+    else
+        genreRegExp = ".*";
+
+    compProxy->setGenreFilter(genreRegExp);
+    // filter by artist
+
+    compProxy->setArtistFilter(ui->ArtistFilterBox->currentText());
 
 }
 
 void MainWindow::clearFilter()
 {
-    /// TODO: here
-    //compProxy->setFilterRegExp(QRegExp("*"));
-    //compProxy->invalidateFilter()
+    compProxy->setArtistFilter(".*");
+    compProxy->setGenreFilter(".*");
+
+    for (auto &box:genreCheckBoxes)
+    {
+        box->setCheckState(Qt::CheckState::Unchecked);
+    }
 }
 
 void MainWindow::updateWeekDay(){

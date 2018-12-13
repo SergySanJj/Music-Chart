@@ -32,11 +32,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QPlainTextEdit" name="artistName">
-         <property name="maximumSize">
+        <widget class="QLineEdit" name="artistName">
+         <property name="minimumSize">
           <size>
-           <width>16777215</width>
-           <height>40</height>
+           <width>200</width>
+           <height>0</height>
           </size>
          </property>
         </widget>

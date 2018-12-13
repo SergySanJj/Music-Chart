@@ -18,6 +18,8 @@ AddArtistDialog::AddArtistDialog(QWidget *parent) :
         genreCheckBoxes.push_back(newCheckBox);
     }
 
+    ui->artistName->setValidator(new QRegExpValidator(QRegExp("([a-z]|[0-9]| )*",Qt::CaseSensitivity::CaseInsensitive)));
+
     connect(ui->AddButton,SIGNAL(clicked()),this,SLOT(onAdd()));
     connect(ui->CancelButton,SIGNAL(clicked()),this,SLOT(close()));
 }
@@ -30,7 +32,7 @@ AddArtistDialog::~AddArtistDialog()
 void AddArtistDialog::onAdd()
 {
     std::vector<Genres> selectedGenres;
-    std::string name = ui->artistName->toPlainText().toStdString();
+    std::string name = ui->artistName->text().toStdString();
 
     int cnt = 0;
     for (auto &box:genreCheckBoxes)

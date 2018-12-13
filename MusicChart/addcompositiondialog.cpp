@@ -13,6 +13,8 @@ addCompositionDialog::addCompositionDialog(Chart &chart, QWidget *parent) :
 
     ui->ArtistBox->setModel(artListModel);
 
+    ui->NameText->setValidator(new QRegExpValidator(QRegExp("([a-z]|[0-9]| )*",Qt::CaseSensitivity::CaseInsensitive)));
+
     for (int i=Genres::Rock;i<=Genres::Chillout;i++)
     {
         ui->GenreBox->addItem(QString::fromStdString(getGenreString(Genres(i))));

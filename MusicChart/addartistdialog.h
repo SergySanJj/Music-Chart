@@ -7,6 +7,7 @@
 #include <string>
 
 #include <QDialog>
+#include <QRegExpValidator>
 #include <QCheckBox>
 
 namespace Ui {

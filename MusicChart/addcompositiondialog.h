@@ -6,6 +6,7 @@
 #include "artistslistmodel.h"
 
 #include <QDialog>
+#include <QRegExpValidator>
 
 namespace Ui {
 class addCompositionDialog;

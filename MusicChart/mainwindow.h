@@ -8,6 +8,8 @@
 #include "artistslistmodel.h"
 #include "compositionsmodel.h"
 
+#include "filterartistgenreproxy.h"
+
 #include "addartistdialog.h"
 #include "addcompositiondialog.h"
 
@@ -49,7 +51,7 @@ private:
     artistsListModel* artListModel;
     compositionsModel* compModel;
 
-    QSortFilterProxyModel *compProxy;
+    filterArtistGenreProxy *compProxy;
     QSortFilterProxyModel *artProxy;
 
     std::vector<QCheckBox*> genreCheckBoxes;
