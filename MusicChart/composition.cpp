@@ -18,6 +18,13 @@ void Composition::updatePopularity(QDate currentDate)
         popularity = 0.0;
         return;
     }
+
+    if (popularity<=0.05)
+    {
+        popularity = artist->getPopularity()/2.0 + 0.06;
+        return;
+    }
+
     auto delta = currentDate.toJulianDay() - releaseDate.toJulianDay();
 
     std::mt19937 mt(static_cast<std::size_t>(seed+delta));
