@@ -8,10 +8,10 @@ QWidget {
 }
 
 QTableView {
-    selection-color: rgb(230,230,230);
+    selection-color: rgb(240,240,240);
     selection-background-color: rgb(213, 126, 76);
     background-color: rgb(112,112,112);
-    color: rgb(210,210,210);
+    color: rgb(230,230,230);
 }
 
 QLineEdit {
@@ -68,6 +68,7 @@ QPushButton {
         border: 2px solid rgb(200,200,200);
         border-radius: 8px;
         color: rgb(230,230,230);
+        min-height: 45 px;
 }
 
 QPushButton:hover {

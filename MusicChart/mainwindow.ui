@@ -39,6 +39,12 @@
       </item>
       <item>
        <widget class="QDateEdit" name="dateEdit">
+        <property name="minimumSize">
+         <size>
+          <width>135</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="maximumDate">
          <date>
           <year>2050</year>
@@ -352,13 +358,13 @@
        <widget class="QPushButton" name="filterButton">
         <property name="minimumSize">
          <size>
-          <width>80</width>
+          <width>100</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>100</width>
           <height>80</height>
          </size>
         </property>
@@ -371,13 +377,13 @@
        <widget class="QPushButton" name="clearFilterButton">
         <property name="minimumSize">
          <size>
-          <width>80</width>
+          <width>100</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>100</width>
           <height>80</height>
          </size>
         </property>
