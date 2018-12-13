@@ -6,6 +6,7 @@
 
 #include "artistsmodel.h"
 #include "artistslistmodel.h"
+#include "artistsboxmodel.h"
 #include "compositionsmodel.h"
 
 #include "filterartistgenreproxy.h"
@@ -45,19 +46,23 @@ public slots:
 private:
     Ui::MainWindow *ui;
 
+    void updateWeekDay();
+
+    void addTestArtistAndCompositions();
+
+    /// Stores chart object that is used in models
     Chart chart;
 
+    /// Chart models for tables and lists
     artistsModel* artModel;
-    artistsListModel* artListModel;
+    artistsBoxModel* artListModel;
     compositionsModel* compModel;
 
+    /// Models for sort/filter
     filterArtistGenreProxy *compProxy;
     QSortFilterProxyModel *artProxy;
 
     std::vector<QCheckBox*> genreCheckBoxes;
-
-    void updateWeekDay();
-
 };
 
 #endif // MAINWINDOW_H

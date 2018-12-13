@@ -22,7 +22,6 @@ int ChartItem::generateSeed(const std::string &s) const{
         cnt*=10;
         cnt = cnt % 100000;
     }
-    //std::cout << s << " " << res << "\n";
 
     return res;
 }

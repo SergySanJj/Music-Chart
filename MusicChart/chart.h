@@ -28,12 +28,6 @@ public:
     bool checkArtistExistance(const std::string &_name) const;
 
 protected:
-    std::vector<std::shared_ptr<Artist> > artists;
-    std::vector<std::shared_ptr<Composition> > compositions;
-
-    //std::vector<std::shared_ptr<Artist> > currentArtists;
-    //std::vector<std::shared_ptr<Composition> > currentCompositions;
-
     void updateGenrePopularity(const QDate &currentDate);
 
     void updateArtistsPopularity(const QDate &currentDate);
@@ -44,9 +38,12 @@ protected:
 
     void setZeroPopularities();
 
+    std::vector<std::shared_ptr<Artist> > artists;
+    std::vector<std::shared_ptr<Composition> > compositions;
 
     friend class artistsModel;
     friend class artistsListModel;
     friend class compositionsModel;
+    friend class artistsBoxModel;
 };
 

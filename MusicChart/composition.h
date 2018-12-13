@@ -21,29 +21,22 @@ public:
 
     void updatePopularity(QDate currentDate);
 
-    //double getPopularity() const;
-
-    //std::string getName() const;
-
     std::string getArtistName() const;
 
     QDate getReleaseDate() const;
 
     Genres getGenre() const;
 
-    //void normalize(double a, double b);
-
     void setZeroPopularity();
 
-    std::string getGenresString()
-    {
-        return getGenreString(genre);
-    }
+    std::string getGenresString() const;
 
 private:
     std::shared_ptr<Artist> artist;
     Genres genre;
     QDate releaseDate;
+
+    int stognationAfter;
 
     void normalizeNegative();
 };

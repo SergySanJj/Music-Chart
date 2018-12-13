@@ -57,9 +57,11 @@ void Chart::update(const QDate &currentDate)
     //normalizePopularity();
     setZeroPopularities();
 
+    QDate dateIter = QDate(1970,1,5);
+    long long julianDays = dateIter.toJulianDay();
     auto iterations = currentDate.toJulianDay();
 
-    for (auto i=QDate(1950,1,1).toJulianDay(); i<iterations; i+=7)
+    for (auto i=julianDays; i<iterations; i=dateIter.toJulianDay())
     {
         auto currIterationDate = QDate::fromJulianDay(i);
 
@@ -73,6 +75,8 @@ void Chart::update(const QDate &currentDate)
         updateCompositionsPopularity(currIterationDate);
 
         //normalizePopularity();
+
+        dateIter = dateIter.addMonths(1);
     }
 }
 

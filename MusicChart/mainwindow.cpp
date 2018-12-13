@@ -7,16 +7,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    chart.addArtist("Queen",{Genres::Rock});
-    chart.addArtist("Eminem",{Genres::HipHop});
-    chart.addArtist("Lady Gaga",{Genres::Pop});
+    /// Test artists and compositions
+    addTestArtistAndCompositions();
 
-    chart.addComposition("Queen","It's a kind of magic",Genres::Rock,QDate(1986,3,17));
-    chart.addComposition("Eminem","It's a kind of",Genres::HipHop,QDate(1996,3,17));
-    chart.addComposition("Lady Gaga","It's a kind",Genres::Pop,QDate(2006,3,17));
+
 
     artModel = new artistsModel(chart,this);
-    artListModel = new artistsListModel(chart,this);
+    artListModel = new artistsBoxModel(chart,this);
     compModel = new compositionsModel(chart,this);
 
 
@@ -53,11 +50,8 @@ MainWindow::MainWindow(QWidget *parent) :
         genreCheckBoxes.push_back(newCheckBox);
     }
 
-
-
     connect(ui->AddArtist, SIGNAL(clicked()),this,SLOT(addArtistButtonClicked()));
     connect(ui->AddComposition, SIGNAL(clicked()),this,SLOT(addCompositionButtonClicked()));
-    connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateButtonClicked()));
     connect(ui->dateEdit, SIGNAL(dateChanged(QDate)),this, SLOT(updateButtonClicked()));
     connect(ui->filterButton,SIGNAL(clicked()),this,SLOT(filter()));
     connect(ui->clearFilterButton,SIGNAL(clicked()),this,SLOT(clearFilter()));
@@ -68,17 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateWeekDay();
 
-    /// TODO: here
-    //compProxy->setFilterRegExp(QRegExp("Rock",Qt::CaseInsensitive,QRegExp::FixedString));
-    //compProxy->setFilterKeyColumn(2);
-
-
     artModel->sort(1,Qt::SortOrder::DescendingOrder);
     compModel->sort(4,Qt::SortOrder::DescendingOrder);
-
-
-    //ui->ArtistsView->sortByColumn(1,Qt::SortOrder::DescendingOrder);
-    //ui->compositionsView->sortByColumn(4,Qt::SortOrder::DescendingOrder);
 }
 
 MainWindow::~MainWindow()
@@ -122,9 +107,9 @@ void MainWindow::addCompositionButtonClicked()
 
 void MainWindow::updateButtonClicked()
 {
-     style()->unpolish(ui->updatingLabel);
-     ui->updatingLabel->setStyleSheet("color: rgba(110,110,110,255);");
-     style()->polish(ui->updatingLabel);
+    style()->unpolish(ui->updatingLabel);
+    ui->updatingLabel->setStyleSheet("color: rgba(110,110,110,255);");
+    style()->polish(ui->updatingLabel);
 
     artModel->layoutAboutToBeChanged();
     compModel->layoutAboutToBeChanged();
@@ -132,7 +117,6 @@ void MainWindow::updateButtonClicked()
     std::thread worker([&](){
         chart.update(ui->dateEdit->date());
     });
-
 
     artModel->layoutChanged();
     compModel->layoutChanged();
@@ -157,19 +141,21 @@ void MainWindow::filter()
     for (auto &box:genreCheckBoxes)
     {
         if (box->checkState())
-        {
             genreRegExp += box->text()+"|";
-        }
     }
+
     if (genreRegExp != "(")
         genreRegExp[genreRegExp.size()-1] = ')';
     else
         genreRegExp = ".*";
 
     compProxy->setGenreFilter(genreRegExp);
-    // filter by artist
 
-    compProxy->setArtistFilter(ui->ArtistFilterBox->currentText());
+    // filter by artist
+    if (ui->ArtistFilterBox->currentText() == "**all**")
+        compProxy->setArtistFilter(".*");
+    else
+        compProxy->setArtistFilter(ui->ArtistFilterBox->currentText());
 
 }
 
@@ -182,6 +168,8 @@ void MainWindow::clearFilter()
     {
         box->setCheckState(Qt::CheckState::Unchecked);
     }
+
+    ui->ArtistFilterBox->setCurrentIndex(0);
 }
 
 void MainWindow::updateWeekDay(){
@@ -215,4 +203,35 @@ void MainWindow::updateWeekDay(){
         break;
     }
     ui->WeekDay->setText(dayOfWeek);
+}
+
+void MainWindow::addTestArtistAndCompositions()
+{
+    chart.addArtist("Queen",{Genres::Rock});
+    chart.addArtist("Eminem",{Genres::HipHop});
+    chart.addArtist("Lady Gaga",{Genres::Pop});
+    chart.addArtist("Multigenre rocker",{Genres::Rock, Genres::Alternative});
+
+    chart.addComposition("Queen","queen1",Genres::Rock,QDate(1986,3,17));
+    chart.addComposition("Queen","queen2",Genres::Rock,QDate(1986,3,17));
+    chart.addComposition("Queen","queen3",Genres::Rock,QDate(1986,3,17));
+    chart.addComposition("Queen","queen4",Genres::Rock,QDate(1987,5,20));
+    chart.addComposition("Queen","queen5",Genres::Alternative,QDate(1988,6,21));
+
+    chart.addComposition("Eminem","eminem1",Genres::HipHop,QDate(1996,1,17));
+    chart.addComposition("Eminem","eminem2",Genres::HipHop,QDate(1996,2,22));
+    chart.addComposition("Eminem","eminem3",Genres::HipHop,QDate(2000,2,21));
+    chart.addComposition("Eminem","eminem4",Genres::HipHop,QDate(2002,2,1));
+
+    chart.addComposition("Lady Gaga","lady1",Genres::Pop,QDate(2006,3,17));
+    chart.addComposition("Lady Gaga","lady2",Genres::Pop,QDate(2006,4,1));
+    chart.addComposition("Lady Gaga","lady3",Genres::Pop,QDate(2006,5,17));
+    chart.addComposition("Lady Gaga","lady4",Genres::Pop,QDate(2006,6,3));
+    chart.addComposition("Lady Gaga","lady5",Genres::Pop,QDate(2007,7,11));
+    chart.addComposition("Lady Gaga","lady6",Genres::Pop,QDate(2007,8,19));
+
+    chart.addComposition("Multigenre rocker","mr1 rock",Genres::Rock,QDate(2003,8,19));
+    chart.addComposition("Multigenre rocker","mr1 pop",Genres::Pop,QDate(2004,8,19));
+    chart.addComposition("Multigenre rocker","mr1 alternative",Genres::Alternative,QDate(2005,8,19));
+    chart.addComposition("Multigenre rocker","mr1 hip hop",Genres::HipHop,QDate(2015,8,19));
 }

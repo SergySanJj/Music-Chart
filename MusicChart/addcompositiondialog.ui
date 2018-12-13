@@ -150,9 +150,9 @@
            </property>
            <property name="minimumDate">
             <date>
-             <year>1950</year>
+             <year>1970</year>
              <month>1</month>
-             <day>1</day>
+             <day>5</day>
             </date>
            </property>
            <property name="displayFormat">

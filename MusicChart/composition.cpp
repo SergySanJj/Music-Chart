@@ -1,8 +1,14 @@
 #include "composition.h"
 
-Composition::Composition(std::shared_ptr<Artist> &_artist, const std::string &_name, Genres _genre, QDate _releaseDate):
-    ChartItem (_name), artist(_artist), genre(_genre), releaseDate(_releaseDate) {
+Composition::Composition(std::shared_ptr<Artist> &_artist, const std::string &_name, Genres _genre, QDate _releaseDate)
+    : ChartItem (_name), artist(_artist), genre(_genre), releaseDate(_releaseDate)
+{
 
+    std::mt19937 mt(static_cast<std::size_t>(seed));
+
+    std::uniform_real_distribution<double> coef(1.0, 5.0);
+
+    stognationAfter = static_cast<int>(ChartItem::regressAfter*coef(mt));
 }
 
 void Composition::updatePopularity(QDate currentDate)
@@ -19,7 +25,7 @@ void Composition::updatePopularity(QDate currentDate)
     double start;
     double end;    
 
-    if (delta >= ChartItem::regressAfter)
+    if (delta >= stognationAfter)
     {
         start = -1.0;
         end = 1.0;
@@ -72,6 +78,11 @@ QDate Composition::getReleaseDate() const { return releaseDate; }
 Genres Composition::getGenre() const { return genre; }
 
 void Composition::setZeroPopularity() { popularity = 0.0; }
+
+std::string Composition::getGenresString() const
+{
+    return getGenreString(genre);
+}
 
 void Composition::normalizeNegative(){
     if (popularity<0.0)

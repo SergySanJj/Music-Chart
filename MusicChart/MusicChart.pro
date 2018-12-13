@@ -38,7 +38,8 @@ SOURCES += \
     addartistdialog.cpp \
     addcompositiondialog.cpp \
     artistslistmodel.cpp \
-    filterartistgenreproxy.cpp
+    filterartistgenreproxy.cpp \
+    artistsboxmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -53,7 +54,8 @@ HEADERS += \
     addartistdialog.h \
     addcompositiondialog.h \
     artistslistmodel.h \
-    filterartistgenreproxy.h
+    filterartistgenreproxy.h \
+    artistsboxmodel.h
 
 FORMS += \
         mainwindow.ui \

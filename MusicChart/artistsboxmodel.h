@@ -1,16 +1,16 @@
-#ifndef ARTISTSLISTMODEL_H
-#define ARTISTSLISTMODEL_H
+#ifndef ARTISTSBOXMODEL_H
+#define ARTISTSBOXMODEL_H
 
 #include "chart.h"
 
 #include <QAbstractListModel>
 
-class artistsListModel : public QAbstractListModel
+class artistsBoxModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit artistsListModel(Chart &_chart, QObject *parent = nullptr);
+    explicit artistsBoxModel(Chart &_chart,QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
@@ -20,4 +20,4 @@ private:
     Chart *chart;
 };
 
-#endif // ARTISTSLISTMODEL_H
+#endif // ARTISTSBOXMODEL_H

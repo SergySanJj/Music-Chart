@@ -17,6 +17,7 @@ class Artist : public ChartItem
 public:
     /// no empty constructor
     //Artist();
+
     ~Artist()=default;
 
     Artist(const std::string &_name, const std::vector<Genres> &_preferredGenres);
@@ -42,5 +43,6 @@ private:
 
     std::vector<std::shared_ptr<Composition> > compositions;
 
+    /// Composition with max popularity
     std::shared_ptr<Composition> signatureComposition;
 };
