@@ -40,6 +40,8 @@ public:
 
     std::string getCompositionArtistName(std::size_t row) const;
 
+    double maxCompositionPopularity() const;
+
 protected:
 
     void updateStep(const QDate &currIterationDate);

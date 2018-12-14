@@ -6,7 +6,7 @@ Composition::Composition(std::shared_ptr<Artist> &_artist, const std::string &_n
 
     std::mt19937 mt(static_cast<std::size_t>(seed));
 
-    std::uniform_real_distribution<double> coef(1.0, 5.0);
+    std::uniform_real_distribution<double> coef(0.1, 20.0);
 
     stognationAfter = static_cast<int>(ChartItem::regressAfter*coef(mt));
 }

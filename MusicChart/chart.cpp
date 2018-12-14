@@ -260,6 +260,19 @@ std::string Chart::getCompositionArtistName(std::size_t row) const{
     return compositions[row]->getArtistName();
 }
 
+double Chart::maxCompositionPopularity() const {
+    double maxPop = -1000;
+    for (auto &composition:compositions)
+    {
+        if (composition->getPopularity() > maxPop)
+            maxPop = composition->getPopularity();
+    }
+    if (maxPop<0)
+        return 0;
+    else
+        return maxPop;
+}
+
 std::size_t Chart::getArtistIndex(const std::string &artistName) const
 {
     for (std::size_t i=0;i<artists.size();i++)
