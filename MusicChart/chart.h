@@ -22,8 +22,6 @@ public:
 
     bool addComposition(const std::string &_artist, const std::string &_name, Genres _genre, QDate _releaseDate);
 
-    //bool addComposition(std::shared_ptr<Artist> _artist, const std::string &_name, Genres _genre, QDateTime _releaseDate);
-
     void update(const QDate &currentDate);
 
     bool checkArtistExistance(const std::string &_name) const;
