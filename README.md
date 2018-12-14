@@ -26,6 +26,6 @@
 
 Все формы адаптивны.
 
-Для создания графиков использовалась библиотека <a href="https://www.qcustomplot.com">QCustomPlot</a>
+Для создания графиков использовалась библиотека QCustomPlot https://www.qcustomplot.com
 
 
