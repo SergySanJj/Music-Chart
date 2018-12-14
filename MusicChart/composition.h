@@ -31,6 +31,8 @@ public:
 
     std::string getGenresString() const;
 
+    double getArtistPopularity() const;
+
 private:
     std::shared_ptr<Artist> artist;
     Genres genre;

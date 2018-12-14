@@ -28,7 +28,7 @@ public:
 
     std::string getCompositionString(std::size_t row) const;
 
-    std::pair<QVector<double>,QVector<double> > getCompositionHistory(const QDate &currentDate, std::size_t row);
+    std::vector<std::pair<QVector<double>, QVector<double> > > getCompositionHistory(const QDate &currentDate, std::size_t row);
 
     double getCompositionPopularity(std::size_t row) const;
 

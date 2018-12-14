@@ -92,6 +92,10 @@ std::string Composition::getGenresString() const
     return getGenreString(genre);
 }
 
+double Composition::getArtistPopularity() const {
+    return artist->getPopularity();
+}
+
 void Composition::normalizeNegative(){
     if (popularity<0.0)
         popularity=0.0;

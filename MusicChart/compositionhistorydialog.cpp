@@ -16,10 +16,24 @@ compositionHistoryDialog::compositionHistoryDialog(Chart &_chart, QDate _date, s
     auto coords = chart->getCompositionHistory(date,row);
 
     ui->HistoryPlot->addGraph();
-    ui->HistoryPlot->graph(0)->setData(coords.first, coords.second);
+    ui->HistoryPlot->addGraph();
+    ui->HistoryPlot->addGraph();
 
-    ui->HistoryPlot->graph(0)->setBrush(QBrush(QColor(200,200,200,20)));
-    ui->HistoryPlot->graph(0)->setPen(QPen(QColor(253, 166, 116),3));
+    ui->HistoryPlot->legend->setVisible(true);
+
+    ui->HistoryPlot->graph(2)->setName("Composition");
+    ui->HistoryPlot->graph(2)->setData(coords[0].first, coords[0].second);
+    ui->HistoryPlot->graph(2)->setBrush(QBrush(QColor(200,200,200,20)));
+    ui->HistoryPlot->graph(2)->setPen(QPen(QColor(253, 166, 116),4));
+
+    ui->HistoryPlot->graph(1)->setName("Genre Avg");
+    ui->HistoryPlot->graph(1)->setData(coords[1].first, coords[1].second);
+    ui->HistoryPlot->graph(1)->setPen(QPen(QColor(38, 233, 90),2));
+
+    ui->HistoryPlot->graph(0)->setName("Artist Avg");
+    ui->HistoryPlot->graph(0)->setData(coords[2].first, coords[2].second);
+    ui->HistoryPlot->graph(0)->setPen(QPen(QColor(245, 87, 119),2));
+
 
     ui->HistoryPlot->xAxis->setLabel("months after release");
     ui->HistoryPlot->yAxis->setLabel("popularity");

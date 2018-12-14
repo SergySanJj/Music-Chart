@@ -67,15 +67,22 @@ void Chart::update(const QDate &currentDate)
     }
 }
 
-std::pair<QVector<double>, QVector<double> > Chart::getCompositionHistory(const QDate &currentDate, std::size_t row){
+std::vector<std::pair<QVector<double>, QVector<double> > > Chart::getCompositionHistory(const QDate &currentDate, std::size_t row){
     long long begin = compositions[row]->getReleaseDate().toJulianDay();
     long long end = currentDate.toJulianDay();
 
     if (end<begin)
-        return std::make_pair(QVector<double>(),QVector<double>());
+        return {std::make_pair(QVector<double>(),QVector<double>()),
+                std::make_pair(QVector<double>(),QVector<double>()),
+                std::make_pair(QVector<double>(),QVector<double>())};
 
     QVector<double> x(static_cast<int>(end-begin+1));
-    QVector<double> y(static_cast<int>(end-begin+1));
+
+    QVector<double> yComp(static_cast<int>(end-begin+1));
+
+    QVector<double> yGenre(static_cast<int>(end-begin+1));
+
+    QVector<double> yArt(static_cast<int>(end-begin+1));
 
     setZeroPopularities();
 
@@ -85,6 +92,8 @@ std::pair<QVector<double>, QVector<double> > Chart::getCompositionHistory(const 
 
     QDate release = compositions[row]->getReleaseDate();
 
+    Genres compGenre = compositions[row]->getGenre();
+
     while (dateIter<=currentDate)
     {
         updateStep(dateIter);
@@ -92,13 +101,17 @@ std::pair<QVector<double>, QVector<double> > Chart::getCompositionHistory(const 
         if (dateIter>=release)
         {
             x[cnt] = cnt;
-            y[cnt] = compositions[row]->getPopularity();
+            yComp[cnt] = compositions[row]->getPopularity();
+            yGenre[cnt] = GenrePopularity::at(compGenre);
+            yArt[cnt] = compositions[row]->getArtistPopularity();
             cnt++;
         }
         dateIter = dateIter.addMonths(1);
     }
 
-    return std::make_pair(x,y);
+    return {std::make_pair(x,yComp),
+            std::make_pair(x,yGenre),
+            std::make_pair(x,yArt)};
 }
 
 void Chart::updateStep(const QDate &currIterationDate)
